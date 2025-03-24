@@ -16,6 +16,16 @@ class ClaimController extends Controller
         $this->claimService = $claimService;
     }
 
+    public function index(Request $request)
+    {
+        $query = $this->claimService->index();
+        if ($query) {
+            return $this->getResponseJson(self::SUCCESS, $query);
+        } else {
+            return $this->getResponseJson(self::ERROR, $this->setMessage('something went wrong!'));
+        }
+    }
+
     public function store(Request $request)
     {
         try {

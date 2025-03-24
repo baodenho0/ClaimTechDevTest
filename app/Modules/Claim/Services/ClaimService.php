@@ -37,4 +37,9 @@ class ClaimService extends BaseService
         return $claim;
     }
 
+    public function index()
+    {
+        return $this->claimRepository->getByUserId(auth()->id());
+    }
+
 }

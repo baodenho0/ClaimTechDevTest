@@ -6,5 +6,5 @@ use App\Http\Repositories\BaseRepositoryInterface;
 
 interface ClaimRepositoryInterface extends BaseRepositoryInterface
 {
-
+    public function getByUserId($userId);
 }
