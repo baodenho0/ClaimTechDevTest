@@ -6,7 +6,9 @@ use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Modules\User\Repositories\UserRepository;
+use App\Modules\Claim\Repositories\ClaimRepository;
 use App\Modules\User\Repositories\UserRepositoryInterface;
+use App\Modules\Claim\Repositories\ClaimRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(ClaimRepositoryInterface::class, ClaimRepository::class);
     }
 
     /**
