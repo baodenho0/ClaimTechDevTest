@@ -10,6 +10,7 @@ use App\Modules\User\Repositories\UserRepositoryInterface;
 
 class UserService extends BaseService
 {
+    const PATH_IMAGE = '/images/users';
     private $userRepository;
 
     public function __construct(
@@ -27,6 +28,7 @@ class UserService extends BaseService
         }
 
         return false;
+
     }
 
     public function register($request)
@@ -39,6 +41,18 @@ class UserService extends BaseService
         ]);
         $token = $user->createToken('PersonalAccessToken')->plainTextToken;
         return ['token' => $token];
+    }
+
+    public function upload($request)
+    {
+        $userId = auth()?->user()?->id;
+        $this->userRepository->update($userId, [
+            'id_path' => $this->uploadFile(self::PATH_IMAGE, $request->file('id')),
+            'proof_of_address_path' => $this->uploadFile(self::PATH_IMAGE, $request->file('proof_of_address')),
+
+        ]);
+        $user = $this->userRepository->find($userId);
+        return $user;
     }
 
 }

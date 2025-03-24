@@ -54,7 +54,14 @@ class UserController extends Controller
         }
     }
 
-
-
+    public function upload(Request $request)
+    {
+        $query = $this->userService->upload($request);
+        if ($query) {
+            return $this->getResponseJson(self::SUCCESS, $query);
+        } else {
+            return $this->getResponseJson(self::ERROR, $this->setMessage('something went wrong!'));
+        }
+    }
 
 }
